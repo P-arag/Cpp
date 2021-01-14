@@ -3,9 +3,11 @@ using namespace std;
 
 int main()
 {
-    int inp;
-    cout << "Hello World" << endl;
-    cin >> inp;
-    cout << "Your integer:- " << inp;
+    int num1, num2;
+    cout << "Enter the first number:- ";
+    cin >> num1;
+    cout << "Enter the second number:- ";
+    cin >> num2;
+    cout << "The addition is:- " << num1 + num2;
     return 0;
 }
