@@ -1,17 +1,16 @@
 {
-	
 	"Startup Snippet for C++": {
 		"scope": "cpp",
 		"prefix": "setup",
 		"body": [
 			"#include <iostream>",
-			"#include <conio.h>",
+			"#include <ncurses.h>",
 			"using namespace std;",
 			"",
 			"",
 			"int main()",
 			"{",
-			"    getche()",
+			"    getch();",
 			"    return 0;",
 			"}"
 		],
