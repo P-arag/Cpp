@@ -52,7 +52,6 @@ void insert(BetterArray *a, int index, int value) {
             prev = temp;
         }
     } else {
-        printf("dfas\n");
         a->base_ptr[index] = value;
         a->used_size = index+1;
     }
@@ -71,6 +70,14 @@ void delete(BetterArray *a, int index) {
         }
     }
     a->used_size--;
+}
+
+void push(BetterArray *a, int value) {
+    insert(a, a->used_size-1, value);
+}
+
+void pop(BetterArray *a, int value) {
+    delete(a, a->used_size-1);
 }
 
 int get_val(BetterArray *a, int index) {
@@ -103,6 +110,24 @@ BetterArray slice(BetterArray *a, int from, int to) {
     return slicedArr;
 }
 
+BetterArray linear_search(BetterArray *a, int element,  int multiple) {
+    BetterArray indices;
+    if(multiple) { 
+        create_array(&indices, a->used_size, 2);
+    } else {
+        create_array(&indices, 1, 1);
+    }
+
+    for(int i=0; i < a->used_size; i++) {
+        if(a->base_ptr[i] == element) {  
+            printf("%d\n" , i);
+            push(&indices, i);
+            if(!multiple) break;
+        }
+    }
+    return indices;
+}
+
 int main() {
     BetterArray marks;
     create_array(&marks, 100, 50);
@@ -113,14 +138,18 @@ int main() {
     set_val(&marks, 4, 5);
     insert(&marks, 3, 65);
     insert(&marks, 56 , 66);
-    printf("%d\n", get_val(&marks, -1));
-
+    push(&marks, 99);
+    push(&marks, 98);
     BetterArray sliced = slice(&marks, 2, 5);
     set_val(&sliced, 12, 88);
-    delete(&sliced, 1); 
+    delete(&sliced, 12); 
+    set_val(&sliced, 6, 5);
+    set_val(&sliced, 8, 5);
+    BetterArray linearSearchIndices = linear_search(&sliced, 5, 1);
+    
+    display(&linearSearchIndices);
     display(&marks);
     display(&sliced);
-    summary(&marks);
     summary(&sliced);
     return 0;
 }
