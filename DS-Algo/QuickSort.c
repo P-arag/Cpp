@@ -18,37 +18,36 @@ void display(int *arr, int len) {
     printf("]\n");
 }
 
+int partition(int *arr, int low, int high) {
+    // Select last element as pivot
+    int pivot = arr[high];
+
+    // Declare two counters
+    int i = low - 1; // Swap counter
+    int j; 
+
+    for(j=low; j<high; j++) {
+        if(arr[j] <= pivot) { // if current elem less than pivot
+            // Increment i and swap
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+
+    swap(&arr[i+1], &arr[high]);
+    display(arr, sizeof(arr)/4);
+    return i+1;
+}
 
 void quick_sort(int *arr, int low, int high) {
-    if(high <= low) {
-        return;
+    if(high > low) {
+        int partitioningIdx = partition(arr, low, high);
+
+        // Pass the arrays left and right of the partitionIdx into quick_sort
+        quick_sort(arr, low, partitioningIdx - 1);
+        quick_sort(arr, partitioningIdx + 1, high);
     }
-    // Start by picking an element in the middle of the list
-    int middleElem = floor((high+1)/2);
-    // Swap the middleElem with the lastElement
-    swap(&arr[middleElem], &arr[high]);
-    int pivot = arr[high];
-    display(arr, high+1);
-    // Declare last swapped at and is_less_than pointers
-    int last_swapped=0;
-    int ist =0;
-    printf("Pivot is %d\n", pivot);
-    // Increment ist until less than found
-    while(ist < high) {
-        while(arr[ist] > pivot) {ist++;}
-        printf("ist %d, last_swapped %d\n", ist, last_swapped);
-        // Swap ith and last_swapped
-        swap(&arr[last_swapped], &arr[ist]);
-        last_swapped++;
-        display(arr, high+1);
-    }
-    printf("ist %d\n", ist);
-    printf("ls %d\n", last_swapped);
-    // Put left side of the array through quick_sort
-    quick_sort(arr, low, last_swapped-2); 
-    // Put right side of the array through quick_sort
-    quick_sort(arr, last_swapped, high);
-}
+}   
 
 int main() {
     int arr[] = {10, 7, 12, 6, 3, 2, 8};
@@ -56,5 +55,5 @@ int main() {
 
     display(arr, len);
     quick_sort(arr, 0, len-1);
-    //display(arr, len);
+    display(arr, len);
 }
