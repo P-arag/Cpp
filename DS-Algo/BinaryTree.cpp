@@ -17,18 +17,18 @@ class BinaryTree {
             root->val = root_val;
             
             Node<T> *n1 = new Node<T>;
-            n1->val = 1;
+            n1->val = 12;
             root->left = n1;
             Node<T> *n2 = new Node<T>;
-            n1->val = 6;
+            n1->val = 100;
             root->right = n2;
-            Node<T> *nn1 = new Node<T>;
+            /*Node<T> *nn1 = new Node<T>;
             nn1->val = 5;
             n1->left = nn1; 
             Node<T> *nn2 = new Node<T>;
             nn2->val = 2;
             n1->right = nn2;
-        }
+        */}
 
         void preorder(Node<T> *n) {
             if(n!=NULL) {
