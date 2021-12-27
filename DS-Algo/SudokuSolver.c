@@ -74,7 +74,7 @@ bool sudoku_solver(int grid[9][9], int x, int y)
 
     // If box is not empty move to the next box
     if (grid[x][y] != 0)
-        return sudoku_solver(grid, x, ++y);
+        return sudoku_solver(grid, x, y+1);
   
     // Loop 1-9 and check if 'n' works
     for (int n = 1; n < 10; n++)
@@ -84,7 +84,7 @@ bool sudoku_solver(int grid[9][9], int x, int y)
             // Set that box to 'n'
             grid[x][y] = n;
             // Checking if next box is solvable
-            if (sudoku_solver(grid, x, ++y))
+            if (sudoku_solver(grid, x, y+1))
                 return true;
         }
         // The next boxes are not solvable, so make this one empty and try with n+1
@@ -96,15 +96,15 @@ bool sudoku_solver(int grid[9][9], int x, int y)
 
 int main() {
   int grid[9][9] = 
-       { {2, 0, 0, 5, 0, 7, 4, 0, 6}, 
-         {0, 0, 0, 0, 3, 1, 0, 0, 0}, 
-         {0, 0, 0, 0, 0, 0, 2, 3, 0}, 
-         {0, 0, 0, 0, 2, 0, 0, 0, 0}, 
-         {8, 6, 0, 3, 1, 0, 0, 0, 0}, 
-         {0, 4, 5, 0, 0, 0, 0, 0, 0}, 
-         {0, 0, 9, 0, 0, 0, 7, 0, 0}, 
-         {0, 0, 6, 9, 5, 0, 0, 0, 2}, 
-         {0, 0, 1, 0, 0, 6, 0, 0, 8} };
+      {  {3, 0, 6, 5, 0, 8, 4, 0, 0}, 
+         {5, 2, 0, 0, 0, 0, 0, 0, 0}, 
+         {0, 8, 7, 0, 0, 0, 0, 3, 1}, 
+         {0, 0, 3, 0, 1, 0, 0, 8, 0}, 
+         {9, 0, 0, 8, 6, 3, 0, 0, 5}, 
+         {0, 5, 0, 0, 9, 0, 6, 0, 0}, 
+         {1, 3, 0, 0, 0, 0, 2, 5, 0}, 
+         {0, 0, 0, 0, 0, 0, 0, 7, 4}, 
+         {0, 0, 5, 2, 0, 6, 3, 0, 0} };
 
   display(grid);
   sudoku_solver(grid, 0, 0);
