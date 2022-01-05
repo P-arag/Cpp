@@ -12,7 +12,7 @@ int binary_search(int n, int *arr, int low, int high) {
 
 int main() {
     int arr[] = {2, 12, 44, 56, 78, 99, 1010, 2000};
-    int idx = binary_search(1010, arr, 0, (sizeof(arr) / 4)-1);
+    int idx = binary_search(2, arr, 0, (sizeof(arr) / 4)-1);
     printf("%d\n", idx);
 }
 
